@@ -17,7 +17,7 @@ addpath(genpath('/N/u/kitchell/Karst/Applications/iso2mesh'))
 config = loadjson('config.json');
 
 
-
+mkdir('masks')
 
 T1 = niftiRead(config.T1);
 
@@ -159,7 +159,7 @@ for ifg=1:length(fg_classified)
     % Update:  now just saving the smoothed object.
 %     fiberDensityNifti.data = smoothData(boolMatrixVersion);
     
-    boolSaveName=strcat(fg.name, '_Vol.nii.gz');
+boolSaveName=strcat('masks/',fg.name, '_Vol.nii.gz');
     boolSaveName = strrep(boolSaveName, ' ', '_');
 %     densitySaveName=strcat(saveDir,'/', num2str(subj), '_', fg.name, '_densityVol.nii.gz');
 %     densitySaveName = strrep(densitySaveName, ' ', '_');
