@@ -23,6 +23,11 @@ T1 = niftiRead(config.T1);
 
 load(config.afq_fg);
 
+if config.clean_afq
+    fg_classified = AFQ_clean(fg_classified);
+end
+
+
 thresholdPercent = 20;
 %islandFlag       = false;
 smoothKernel     = [3 3 3];
