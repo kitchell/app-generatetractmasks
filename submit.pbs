@@ -10,7 +10,11 @@ module load matlab
 export MATLABPATH=$MATLABPATH:$SCA_SERVICE_DIR
 matlab -nodisplay -nosplash -r main
 
-echo 0 > finished
-
-
-
+if [ -d "masks" ];
+then 
+  echo 0 > finished
+else
+  echo "directory missing"
+  echo 1 > finished
+  exit 1
+fi
