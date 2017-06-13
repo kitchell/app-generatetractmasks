@@ -5,9 +5,11 @@
 
 cd $PBS_O_WORKDIR
 
-module load matlab
+if [ ! -z $IUHPC ]; then
+	module load matlab
+fi
 
-export MATLABPATH=$MATLABPATH:$SCA_SERVICE_DIR
+export MATLABPATH=$MATLABPATH:$SERVICE_DIR
 matlab -nodisplay -nosplash -r main
 
 if [ -s ./masks/Right_Uncinate_Vol.nii.gz ];
