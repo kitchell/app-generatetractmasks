@@ -3,7 +3,7 @@
 #PBS -N app-generatetractmasks
 #PBS -V
 
-if [ ! -z $IUHPC ]; then
+if [ $ENV == "IUHPC" ]; then
 	cd $PBS_O_WORKDIR
 	module load matlab
 fi
