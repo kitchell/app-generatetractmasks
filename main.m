@@ -9,15 +9,26 @@ function main()
 % smoothBool = 1
 
 
-disp('loading paths')
-addpath(genpath('/N/u/hayashis/BigRed2/git/jsonlab'))
-addpath(genpath('/N/u/kitchell/Karst/Applications/iso2mesh'))
-addpath(genpath('/N/u/hayashis/BigRed2/git/vistasoft'))
-addpath(genpath('/N/u/hayashis/BigRed2/git/afq'))
+switch getenv('ENV')
+case 'IUHPC'
+	disp('loading paths (HPC)')
+	addpath(genpath('/N/u/hayashis/BigRed2/git/jsonlab'))
+	addpath(genpath('/N/u/kitchell/Karst/Applications/iso2mesh'))
+	addpath(genpath('/N/u/hayashis/BigRed2/git/vistasoft'))
+	addpath(genpath('/N/u/hayashis/BigRed2/git/afq'))
+case 'VM'
+	disp('loading paths (VM)')
+	addpath(genpath('/usr/local/jsonlab'))
+	addpath(genpath('/usr/local/iso2mesh'))
+	addpath(genpath('/usr/local/vistasoft'))
+	addpath(genpath('/usr/local/afq'))
+end
 
 % load config.json
 config = loadjson('config.json');
 
+disp('config dump')
+disp(config)
 
 mkdir('masks')
 
@@ -33,6 +44,7 @@ end
 thresholdPercent = 20;
 %islandFlag       = false;
 smoothKernel     = [3 3 3];
+voxelResize = config.voxelResize;
 
 for ifg=1:length(fg_classified)
     fg = fg_classified(ifg);
@@ -105,8 +117,8 @@ for ifg=1:length(fg_classified)
     % seen it in action.  It is set to go to keyboard if it detects islands.
     % It could be that the function to detect islands is broken, so this may
     % simply be pointless.
-    if smoothBool == 0
-        boolMatrixVersion   = emptyMatrix>threshold;
+    if config.smooth == 0
+        boolMatrixVersion   = emptyMatrix>config.threshold;
         fiberBoolNifti.data = boolMatrixVersion;
     else
         smoothData = smooth3(emptyMatrix,'gaussian',smoothKernel);

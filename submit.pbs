@@ -3,11 +3,12 @@
 #PBS -N app-generatetractmasks
 #PBS -V
 
-cd $PBS_O_WORKDIR
+if [ ! -z $IUHPC ]; then
+	cd $PBS_O_WORKDIR
+	module load matlab
+fi
 
-module load matlab
-
-export MATLABPATH=$MATLABPATH:$SCA_SERVICE_DIR
+export MATLABPATH=$MATLABPATH:$SERVICE_DIR
 matlab -nodisplay -nosplash -r main
 
 if [ -s ./masks/Right_Uncinate_Vol.nii.gz ];
