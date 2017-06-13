@@ -12,6 +12,8 @@ function main()
 disp('loading paths')
 addpath(genpath('/N/u/hayashis/BigRed2/git/jsonlab'))
 addpath(genpath('/N/u/kitchell/Karst/Applications/iso2mesh'))
+addpath(genpath('/N/u/hayashis/BigRed2/git/vistasoft'))
+addpath(genpath('/N/u/hayashis/BigRed2/git/afq'))
 
 % load config.json
 config = loadjson('config.json');
