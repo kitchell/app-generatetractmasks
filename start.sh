@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#mainly to debug locally
-
 if [ -z $SERVICE_DIR ]; then export SERVICE_DIR=`pwd`; fi
 
 #clean up previous job (just in case)
