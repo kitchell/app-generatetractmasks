@@ -50,7 +50,8 @@ if [ -f jobid ]; then
 fi
 
 if [ -f pid ]; then
-    echo "assume to be running locally"
+    #echo "assume to be running locally"
+    tail -1 stdout.log
     exit 0
 fi
 
