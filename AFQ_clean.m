@@ -15,7 +15,7 @@ maxIter = 1;
 count = true;
 
 
-for ii = 1:20
+for ii = 1:length(fg_classified)
     fg_clean(ii) = AFQ_removeFiberOutliers(fg_classified(ii), maxDist, maxLen, numNodes, M, count, maxIter);
 end
 
