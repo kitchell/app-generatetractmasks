@@ -86,13 +86,6 @@ for ifg=1:length(fg_classified)
         end
     end
 
-    % % adjusts nifti object field information (probably not necessary)
-    % fiberBoolNifti.dim       = imgBins;
-    % fiberBoolNifti.pixdim    = [voxelResize voxelResize voxelResize];
-    % fiberBoolNifti.qoffset_x = fiberBoolNifti.qoffset_x*(imgRes/voxelResize);
-    % fiberBoolNifti.qoffset_y = fiberBoolNifti.qoffset_y*(imgRes/voxelResize);
-    % fiberBoolNifti.qoffset_z = fiberBoolNifti.qoffset_z*(imgRes/voxelResize);
-
     %duplicates object
     %fiberDensityNifti=fiberBoolNifti;
 
@@ -117,10 +110,7 @@ for ifg=1:length(fg_classified)
     % seen it in action.  It is set to go to keyboard if it detects islands.
     % It could be that the function to detect islands is broken, so this may
     % simply be pointless.
-    if config.smooth == 0
-        boolMatrixVersion   = emptyMatrix>config.threshold;
-        fiberBoolNifti.data = boolMatrixVersion;
-    else
+    if config.smooth
         smoothData = smooth3(emptyMatrix,'gaussian',smoothKernel);
         % auto threshold computation
         % computes the appropriate threshold for the given percentile value.
@@ -164,6 +154,9 @@ for ifg=1:length(fg_classified)
 
         boolMatrixVersion=smoothData>thresholdBinVal;
         fiberBoolNifti.data=boolMatrixVersion;
+    else
+	boolMatrixVersion   = emptyMatrix>config.threshold;
+        fiberBoolNifti.data = boolMatrixVersion;
     end
 
     % convert to unit8 from bool (necessary for niftiSave function)
