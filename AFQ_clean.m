@@ -10,7 +10,7 @@ numNodes = 30;
 
 M = 'mean';
 
-maxIter = 1;
+maxIter = 5;
 
 count = true;
 
