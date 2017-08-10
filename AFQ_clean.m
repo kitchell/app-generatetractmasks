@@ -6,7 +6,8 @@ maxDist = 4;
 
 maxLen = 4;
 
-numNodes = 30;
+#numNodes = 30;
+numNodes = 100;
 
 M = 'mean';
 
