@@ -4,9 +4,6 @@
 #return code 1 = finished successfully
 #return code 2 = failed
 
-##now wait for running to go away
-#progress_url={$SCA_PROGRESS_URL}/{$SCA_PROGRESS_KEY}
-
 if [ -f finished ]; then
     code=`cat finished`
     if [ $code -eq 0 ]; then
@@ -36,7 +33,9 @@ if [ -f jobid ]; then
         exit 0
     fi
     if [ $jobstate == "R" ]; then
-        echo "Running"
+        subid=$(cat jobid | cut -d '.' -f 1)
+        logname="stdout.$subid.*.log"
+        tail -1 $logname
         exit 0
     fi
     if [ $jobstate == "H" ]; then
