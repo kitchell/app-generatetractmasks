@@ -1,13 +1,21 @@
 #!/bin/bash
 #PBS -l nodes=1:ppn=16:dc2,walltime=0:45:00
-#PBS -N app-generatetractmasks
+#PBS -N generatetractmasks
 #PBS -V
+#PBS -o stdout.$PBS_JOBID.log
+#PBS -e stderr.$PBS_JOBID.log
+
+#mainly to debug locally
+if [ -z $SERVICE_DIR ]; then export SERVICE_DIR=`pwd`; fi
+if [ -z $ENV ]; then export ENV=IUHPC; fi
+
+[ $PBS_O_WORKDIR ] && cd $PBS_O_WORKDIR
 
 if [ $ENV == "IUHPC" ]; then
-	cd $PBS_O_WORKDIR
 	module load matlab
 fi
 
+echo "starting matlab"
 export MATLABPATH=$MATLABPATH:$SERVICE_DIR
 matlab -nodisplay -nosplash -r main
 
@@ -15,9 +23,9 @@ matlab -nodisplay -nosplash -r main
 count=$(ls masks/*Vol.nii.gz | wc -l)
 if [ $count -eq 20 ] 
 then 
-  echo 0 > finished
+    echo 0 > finished
 else
-  echo "files missing"
-  echo 1 > finished
-  exit 1
+    echo "output files missing"
+    echo 1 > finished
+    exit 1
 fi
