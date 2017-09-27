@@ -42,12 +42,16 @@ end
 
 eval(sprintf('!NUMFILES=$d', length(fg_classified)));
 
+cm = parula(length(fg_classified));
+
 thresholdPercent = 20;
 %islandFlag       = false;
 smoothKernel     = [3 3 3];
 voxelResize = config.voxelResize;
 
 for ifg=1:length(fg_classified)
+    color_json(ifg).name = fg_classified(i).name;
+    color_json(ifg).color = cm(ifg,:);
     fg = fg_classified(ifg);
 
     %changes from acpc to image space 
@@ -181,4 +185,5 @@ boolSaveName=strcat('masks/',fg.name, '_Vol.nii.gz');
     fprintf(strcat('\n Done with ', fg.name, '\n'))
 end
 
+savejson('',color_json,'masks/color.json');
 end
