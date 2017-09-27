@@ -53,7 +53,8 @@ for ifg=1:length(fg_classified)
     color_json(ifg).name = fg_classified(i).name;
     color_json(ifg).color = cm(ifg,:);
     fg = fg_classified(ifg);
-
+    if length(fg.fibers) == 0:
+        continue
     %changes from acpc to image space 
     for ifibers=1:length(fg.fibers)
     fg.fibers{ifibers}=mrAnatXformCoords(T1.qto_ijk, fg.fibers{ifibers})';
@@ -176,7 +177,7 @@ for ifg=1:length(fg_classified)
     % Update:  now just saving the smoothed object.
 %     fiberDensityNifti.data = smoothData(boolMatrixVersion);
     
-boolSaveName=strcat('masks/',fg.name, '_Vol.nii.gz');
+    boolSaveName=strcat('masks/',fg.name, '_Vol.nii.gz');
     boolSaveName = strrep(boolSaveName, ' ', '_');
 %     densitySaveName=strcat(saveDir,'/', num2str(subj), '_', fg.name, '_densityVol.nii.gz');
 %     densitySaveName = strrep(densitySaveName, ' ', '_');
