@@ -40,6 +40,7 @@ if config.clean_afq
     fg_classified = AFQ_clean(fg_classified);
 end
 
+eval(sprintf('!NUMFILES = $d', length(fg_classified)));
 
 thresholdPercent = 20;
 %islandFlag       = false;
