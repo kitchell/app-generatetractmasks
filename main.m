@@ -190,9 +190,9 @@ for ifg=1:length(fg_classified)
     num_vols = num_vols +1;
 end
 
-eval(sprintf('!NUMFILES=$d', num_vols+1));
+eval(sprintf('!NUMFILES=%d', num_vols+1));
 if num_vols ~= num_tracts
-    fprintf('\n $d tracts were empty\n', num_tracts - num_vols)
+    fprintf('\n %d tracts were empty\n', num_tracts - num_vols)
 end
 
 savejson('',color_json,'masks/color.json');
