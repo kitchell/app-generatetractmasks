@@ -53,8 +53,9 @@ for ifg=1:length(fg_classified)
     color_json(ifg).name = fg_classified(i).name;
     color_json(ifg).color = cm(ifg,:);
     fg = fg_classified(ifg);
-    if length(fg.fibers) == 0:
+    if length(fg.fibers) == 0
         continue
+    end
     %changes from acpc to image space 
     for ifibers=1:length(fg.fibers)
     fg.fibers{ifibers}=mrAnatXformCoords(T1.qto_ijk, fg.fibers{ifibers})';
