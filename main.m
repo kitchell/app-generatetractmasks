@@ -40,7 +40,9 @@ if config.clean_afq
     fg_classified = AFQ_clean(fg_classified);
 end
 
-eval(sprintf('!NUMFILES=$d', length(fg_classified)));
+num_tracts = length(fg_classified);
+
+num_vols = 0
 
 cm = parula(length(fg_classified));
 
@@ -185,6 +187,12 @@ for ifg=1:length(fg_classified)
     niftiWrite(fiberBoolNifti,boolSaveName);
     %     niftiWrite(fiberDensityNifti,densitySaveName);
     fprintf(strcat('\n Done with ', fg.name, '\n'))
+    num_vols = num_vols +1;
+end
+
+eval(sprintf('!NUMFILES=$d', num_vols));
+if num_vol ~= num_tracts
+    fprintf('\n $d tracts were empty\n', num_tracts - num_vol)
 end
 
 savejson('',color_json,'masks/color.json');
