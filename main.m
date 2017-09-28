@@ -42,7 +42,7 @@ end
 
 num_tracts = length(fg_classified);
 
-num_vols = 0
+num_vols = 0;
 
 cm = parula(length(fg_classified));
 
