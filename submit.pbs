@@ -21,6 +21,7 @@ matlab -nodisplay -nosplash -r main
 
 #if [ -s masks/Right_Uncinate_Vol.nii.gz ];
 count=$(ls masks/*Vol.nii.gz | wc -l)
+NUMFILES=`cat numfiles.txt`
 echo $NUMFILES
 if [ "$count" == "$NUMFILES" ] 
 then 
