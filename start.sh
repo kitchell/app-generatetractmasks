@@ -5,6 +5,7 @@ if [ -z $SERVICE_DIR ]; then export SERVICE_DIR=`pwd`; fi
 #clean up previous job (just in case)
 rm -f finished
 rm -r masks
+rm -f numfiles.txt
 
 if [ $ENV == "IUHPC" ]; then
 	queue=""
