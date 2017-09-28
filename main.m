@@ -50,7 +50,7 @@ smoothKernel     = [3 3 3];
 voxelResize = config.voxelResize;
 
 for ifg=1:length(fg_classified)
-    color_json(ifg).name = fg_classified(i).name;
+    color_json(ifg).name = fg_classified(ifg).name;
     color_json(ifg).color = cm(ifg,:);
     fg = fg_classified(ifg);
     if isempty(fg.fibers)
