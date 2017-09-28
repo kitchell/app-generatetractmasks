@@ -190,7 +190,10 @@ for ifg=1:length(fg_classified)
     num_vols = num_vols +1;
 end
 
-eval(sprintf('!export NUMFILES=%d', num_vols));
+fileid = fopen('numfiles.txt', 'w');
+fprintf(fileid, '%d', num_vols);
+fclose(fileid);
+%eval(sprintf('!export NUMFILES=%d', num_vols));
 if num_vols ~= num_tracts
     fprintf('\n %d tracts were empty\n', num_tracts - num_vols)
 end
