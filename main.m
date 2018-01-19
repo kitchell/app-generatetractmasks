@@ -8,21 +8,21 @@ function main()
 % threshold = 2
 % smoothBool = 1
 
-
-switch getenv('ENV')
-    case 'IUHPC'
-        disp('loading paths (HPC)')
-        addpath(genpath('/N/u/brlife/git/jsonlab'))
-        addpath(genpath('/N/u/brlife/git/vistasoft'))
-        addpath(genpath('/N/u/brlife/git/afq-master'))
-        addpath(genpath('/N/u/kitchell/Karst/Applications/iso2mesh'))
-    case 'VM'
-        disp('loading paths (VM)')
-        addpath(genpath('/usr/local/jsonlab'))
-        addpath(genpath('/usr/local/iso2mesh'))
-        addpath(genpath('/usr/local/vistasoft'))
-        addpath(genpath('/usr/local/afq-master'))
-end
+% 
+% switch getenv('ENV')
+%     case 'IUHPC'
+%         disp('loading paths (HPC)')
+%         addpath(genpath('/N/u/brlife/git/jsonlab'))
+%         addpath(genpath('/N/u/brlife/git/vistasoft'))
+%         addpath(genpath('/N/u/brlife/git/afq-master'))
+%         addpath(genpath('/N/u/kitchell/Karst/Applications/iso2mesh'))
+%     case 'VM'
+%         disp('loading paths (VM)')
+%         addpath(genpath('/usr/local/jsonlab'))
+%         addpath(genpath('/usr/local/iso2mesh'))
+%         addpath(genpath('/usr/local/vistasoft'))
+%         addpath(genpath('/usr/local/afq-master'))
+% end
 
 % load config.json
 config = loadjson('config.json');
@@ -36,9 +36,9 @@ T1 = niftiRead(config.T1);
 
 load(config.afq_fg);
 
-if config.clean_afq
-    fg_classified = AFQ_clean(fg_classified);
-end
+% if config.clean_afq
+%     fg_classified = AFQ_clean(fg_classified);
+% end
 
 num_tracts = length(fg_classified);
 

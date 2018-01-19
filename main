@@ -1,0 +1,32 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=16,walltime=0:25:00
+#PBS -N generatetractmasks
+#PBS -V
+#PBS -o stdout.$PBS_JOBID.log
+#PBS -e stderr.$PBS_JOBID.log
+
+#mainly to debug locally
+rm -f finished
+rm -r masks
+rm -f numfiles.txt
+
+#if [ $ENV == "IUHPC" ]; then
+#	module load matlab
+#fi
+
+#echo "starting matlab"
+#export MATLABPATH=$MATLABPATH:$SERVICE_DIR
+#matlab -nodisplay -nosplash -r main
+
+#if [ -s masks/Right_Uncinate_Vol.nii.gz ];
+count=$(ls masks/*Vol.nii.gz | wc -l)
+NUMFILES=`cat numfiles.txt`
+echo $NUMFILES
+if [ "$count" == "$NUMFILES" ] 
+then 
+    echo 0 > finished
+else
+    echo "output files missing"
+    echo 1 > finished
+    exit 1
+fi

@@ -1,8 +1,0 @@
-{
-  "afq_fg": "/N/u/hayashis/Karst/testdata/108323/afq/output.mat",
-  "clean_afq": false,
-  "T1": "/N/u/hayashis/Karst/testdata/108323/anat/t1.nii.gz",
-  "smooth": true,
-  "threshold": 2,
-  "voxelResize": 0.7
-}
