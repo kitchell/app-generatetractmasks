@@ -15,7 +15,7 @@ rm -f numfiles.txt
 #fi
 module load singularity 2> /dev/null
 
-singularity exec -e docker://brainlfe/mcr:neurodebian1604-r2017a compiledmatlab/main
+singularity exec -e docker://brainlife/mcr:neurodebian1604-r2017a ./compiledmatlab/main
 
 #echo "starting matlab"
 #export MATLABPATH=$MATLABPATH:$SERVICE_DIR
