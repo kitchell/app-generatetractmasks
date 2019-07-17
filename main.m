@@ -37,7 +37,17 @@ mkdir('masks')
 T1 = niftiRead(config.T1);
 % T1 = niftiRead('t1.nii.gz');
 
-load(config.wmc);
+% load(config.wmc);
+
+if isfield(config,'output')
+    load(config.output)
+    classification=classification;
+elseif isfield(config,'classification')
+    load(config.classification)
+    classification=classification;
+end
+
+
 wbfg = config.wbfg;
 
 % wbfg = fullfile('track.tck');
