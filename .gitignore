@@ -5,4 +5,7 @@ config.json.copy
 products.json
 dwi*
 *~
+*.mat
+*nii.gz
+*tck
 

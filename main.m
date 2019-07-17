@@ -16,6 +16,8 @@ function main()
 %         addpath(genpath('/N/u/brlife/git/vistasoft'))
 %         addpath(genpath('/N/u/brlife/git/afq-master'))
 %         addpath(genpath('/N/u/kitchell/Karst/Applications/iso2mesh'))
+%         addpath(genpath('/N/u/kitchell/Carbonate/wma_tools'))
+%         addpath(genpath('/N/u/kitchell/Carbonate/mrtrix3/matlab'))
 %     case 'VM'
 %         disp('loading paths (VM)')
 %         addpath(genpath('/usr/local/jsonlab'))
@@ -33,8 +35,15 @@ disp(config)
 mkdir('masks')
 
 T1 = niftiRead(config.T1);
+% T1 = niftiRead('t1.nii.gz');
 
-load(config.afq_fg);
+load(config.wmc);
+wbfg = config.wbfg;
+
+% wbfg = fullfile('track.tck');
+fg_classified = bsc_makeFGsFromClassification_v4(classification, wbfg);
+
+% load(config.afq_fg);
 
 % if config.clean_afq
 %     fg_classified = AFQ_clean(fg_classified);
@@ -52,9 +61,9 @@ smoothKernel     = [3 3 3];
 voxelResize = config.voxelResize;
 
 for ifg=1:length(fg_classified)
-    color_json(ifg).name = fg_classified(ifg).name;
+    color_json(ifg).name = fg_classified{ifg}.name;
     color_json(ifg).color = cm(ifg,:);
-    fg = fg_classified(ifg);
+    fg = fg_classified{ifg};
     if isempty(fg.fibers)
         continue
     end
