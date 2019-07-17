@@ -48,7 +48,7 @@ elseif isfield(config,'classification')
 end
 
 
-wbfg = config.wbfg;
+wbfg = config.track;
 
 % wbfg = fullfile('track.tck');
 fg_classified = bsc_makeFGsFromClassification_v4(classification, wbfg);
